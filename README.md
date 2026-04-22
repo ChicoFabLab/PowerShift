@@ -1,10 +1,10 @@
 # Local Power Monitoring System
 
-A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter outlets (P210M) using the python-kasa CLI. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
+A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter outlets (P210M) using the [python-kasa](https://github.com/python-kasa/python-kasa) CLI. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
 
 ## 1. System Architecture
 - Backend: Python 3 + SQLite3
-- Hardware Interface: python-kasa (via --credentials-hash auth)
+- Hardware Interface: [python-kasa](https://github.com/python-kasa/python-kasa) (via --credentials-hash auth)
 - Frontend: Flask + Chart.js
 - Automation: System Cron
 
@@ -30,7 +30,7 @@ Optional but recommended: Log into tplinkcloud.com and verify your password. If 
 
    Command: git clone https://github.com/ChicoFabLab/PowerShift.git tapo-monitor
 
-3. Install python-kasa:
+3. Install [python-kasa](https://github.com/python-kasa/python-kasa):
    The collector relies on the kasa command-line utility.
    
    Command: pip install python-kasa --upgrade
