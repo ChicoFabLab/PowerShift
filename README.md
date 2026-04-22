@@ -28,7 +28,7 @@ Optional but recommended: Log into tplinkcloud.com and verify your password. If 
 
 1. Clone the project directory:
 
-   Command: git clone https://github.com/ChicoFabLab/PowerShift.git tapo-monitor
+   Command: cd ~ && git clone https://github.com/ChicoFabLab/PowerShift.git tapo-monitor && cd tapo-monitor
 
 3. Install [python-kasa](https://github.com/python-kasa/python-kasa):
    The collector relies on the kasa command-line utility.
