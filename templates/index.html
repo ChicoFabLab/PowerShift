@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PowerShift: Power Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eceff1; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        h2 { margin: 0; color: #2c3e50; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+        .on { background: #c8e6c9; color: #2e7d32; }
+        .off { background: #ffcdd2; color: #c62828; }
+        .info-row { font-size: 0.85em; color: #7f8c8d; margin: 5px 0; }
+        .stat { font-weight: bold; color: #34495e; }
+    </style>
+</head>
+<body>
+    <h1>System Dashboard</h1>
+    <div class="grid">
+        {% for dev in devices %}
+        <div class="card">
+            <div class="header">
+                <h2>{{ dev.outlet_name }}</h2>
+                <span class="badge {{ 'on' if dev.state == 1 else 'off' }}">
+                    {{ 'ACTIVE' if dev.state == 1 else 'OFF' }}
+                </span>
+            </div>
+            <div class="info-row">
+                Network: <span class="stat">{{ dev.ssid }}</span> | 
+                Signal: <span class="stat">{{ dev.rssi }} dBm</span>
+            </div>
+            <div class="info-row">
+                Uptime: <span class="stat">{{ dev.on_since or 'N/A' }}</span>
+            </div>
+            <div class="info-row" style="margin-top: 10px; font-size: 1.1em;">
+                Power: <span class="stat" style="color: #2980b9;">{{ dev.current_w }} W</span> | 
+                Today: <span class="stat">{{ dev.today_kwh }} kWh</span>
+            </div>
+            <canvas id="chart-{{ loop.index }}" height="150"></canvas>
+        </div>
+        <script>
+            fetch('/api/history/{{ dev.outlet_name }}')
+                .then(r => r.json())
+                .then(data => {
+                    new Chart(document.getElementById('chart-{{ loop.index }}'), {
+                        type: 'line',
+                        data: {
+                            labels: data.map(d => d.time.split(' ')[1]),
+                            datasets: [{
+                                label: 'Consumption (Watts)',
+                                data: data.map(d => d.watts),
+                                borderColor: '#2980b9',
+                                backgroundColor: 'rgba(41, 128, 185, 0.1)',
+                                fill: true,
+                                tension: 0.3
+                            }]
+                        },
+                        options: { 
+                            responsive: true,
+                            plugins: { legend: { display: false } },
+                            scales: { y: { beginAtZero: true } }
+                        }
+                    });
+                });
+        </script>
+        {% endfor %}
+    </div>
+</body>
+</html>
