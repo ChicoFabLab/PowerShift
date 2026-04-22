@@ -3,7 +3,7 @@ import re
 import sqlite3
 from datetime import datetime
 
-DB_NAME = 'power_data.db'
+DB_NAME = '/home/user/tapo-monitor/power_data.db'
 
 def poll_all_devices():
     conn = sqlite3.connect(DB_NAME)

@@ -3,7 +3,7 @@ import re
 import sqlite3
 import sys
 
-DB_NAME = 'power_data.db'
+DB_NAME = '/home/user/tapo-monitor/power_data.db'
 
 def fetch_device_metadata(ip, user, pwd):
     """Temporary use of credentials to get the permanent hash and label."""
@@ -59,4 +59,4 @@ if __name__ == "__main__":
         print("Usage: python3 manage_devices.py <IP> <USERNAME> <PASSWORD>")
     else:
         add_device(sys.argv[1], sys.argv[2], sys.argv[3])
-        
+

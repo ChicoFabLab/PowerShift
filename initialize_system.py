@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_NAME = 'power_data.db'
+DB_NAME = '/home/user/tapo-monitor/power_data.db'
 
 def initialize_system():
     conn = sqlite3.connect(DB_NAME)

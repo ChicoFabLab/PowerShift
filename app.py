@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 import sqlite3
 
 app = Flask(__name__)
-DB_NAME = 'power_data.db'
+DB_NAME = '/home/user/tapo-monitor/power_data.db'
 
 def get_db():
     conn = sqlite3.connect(DB_NAME)
