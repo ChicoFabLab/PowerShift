@@ -11,33 +11,49 @@ A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter ou
 ## 2. Prerequisites
 Ensure your system is updated and has the necessary packages installed.
 
-Command:
-sudo apt update && sudo apt install python3-pip sqlite3 -y
+Command: sudo apt update && sudo apt install python3-pip sqlite3 -y
+
+### Tapo App Settings
+Before running any code, you must check this setting, or the plug will continue to reject your "challenge":
+
+Open the Tapo App on your phone.
+
+Go to Me (Profile) > Settings > Third-Party Compatibility.
+
+Ensure this is set to ON.
+
+Optional but recommended: Log into tplinkcloud.com and verify your password. If it contains complex symbols like & or #, consider changing it to a purely alphanumeric password, as these often cause "challenge mismatch" errors in Python.
 
 ## 3. Installation
 
-1. Create the project directory:
-   Command: mkdir ~/tapo-monitor && cd ~/tapo-monitor && mkdir templates
+1. Clone the project directory:
 
-2. Install python-kasa:
+   Command: git clone https://github.com/ChicoFabLab/PowerShift.git tapo-monitor
+
+3. Install python-kasa:
    The collector relies on the kasa command-line utility.
+   
    Command: pip install python-kasa --upgrade
 
-3. Install Flask:
+5. Install Flask:
+
    Command: pip install flask
 
 ## 4. Setup & Configuration
 
 ### Step A: Initialize the Database
 Run this script once to create power_data.db and the required tables for device registry and power logs.
+
 Command: python3 initialize_system.py
 
 ### Step B: Register Devices
 Run the management tool for each P210M outlet. This script handshakes with the device using your credentials, retrieves the Credentials Hash and Device Label, and saves only the hash to the database for future use.
+
 Command: python3 manage_devices.py HOST USERNAME PASSWORD
 
 ### Step C: Secure the Database
 To protect your credentials hashes, set restrictive file permissions:
+
 Command: chmod 600 power_data.db
 
 ## 5. Automation (The Collector)
@@ -51,6 +67,7 @@ The collector.py script should be run every minute to capture a time-series reco
 
 ## 6. Running the Web Dashboard
 Start the Flask server to view your live graphs and network health metrics.
+
 Command: python3 app.py
 
 Access the dashboard at: http://<your-pi-ip>:5000
