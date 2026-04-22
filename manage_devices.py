@@ -56,7 +56,7 @@ def add_device(ip, user, pwd):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print("Usage: python3 manage_devices.py <IP> <USERNAME> <PASSWORD>")
+        print("Usage: python3 manage_devices.py <HOST> <USERNAME> <PASSWORD>")
     else:
         add_device(sys.argv[1], sys.argv[2], sys.argv[3])
 
