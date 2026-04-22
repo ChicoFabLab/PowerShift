@@ -34,7 +34,7 @@ Command: python3 initialize_system.py
 
 ### Step B: Register Devices
 Run the management tool for each P210M outlet. This script handshakes with the device using your credentials, retrieves the Credentials Hash and Device Label, and saves only the hash to the database for future use.
-Command: python3 manage_devices.py IP_ADDRESS USERNAME PASSWORD
+Command: python3 manage_devices.py HOST USERNAME PASSWORD
 
 ### Step C: Secure the Database
 To protect your credentials hashes, set restrictive file permissions:
