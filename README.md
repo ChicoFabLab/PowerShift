@@ -1,4 +1,4 @@
-# Local Power Monitoring System (Raspberry Pi)
+# Local Power Monitoring System
 
 A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter outlets (P210M) using the python-kasa CLI. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
 
@@ -9,7 +9,7 @@ A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter ou
 - Automation: System Cron
 
 ## 2. Prerequisites
-Ensure your Raspberry Pi is updated and has the necessary packages installed.
+Ensure your system is updated and has the necessary packages installed.
 
 Command:
 sudo apt update && sudo apt install python3-pip sqlite3 -y
@@ -34,7 +34,7 @@ Command: python3 initialize_system.py
 
 ### Step B: Register Devices
 Run the management tool for each P210M outlet. This script handshakes with the device using your credentials, retrieves the Credentials Hash and Device Label, and saves only the hash to the database for future use.
-Command: python3 manage_devices.py <IP_ADDRESS> <USERNAME> <PASSWORD>
+Command: python3 manage_devices.py IP_ADDRESS USERNAME PASSWORD
 
 ### Step C: Secure the Database
 To protect your credentials hashes, set restrictive file permissions:
