@@ -1,6 +1,6 @@
 # Local Power Monitoring System
 
-A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter outlets (P210M) using the [python-kasa](https://github.com/python-kasa/python-kasa) CLI. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
+A local-first, cloud-free telemetry system for monitoring TP-Link Tapo/Matter plugs/outlets/switches (P110m, P210M, S515) using [python-kasa](https://github.com/python-kasa/python-kasa) CLI utilities. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
 
 ## 1. System Architecture
 - Backend: Python 3 + SQLite3
@@ -47,9 +47,9 @@ Run this script once to create power_data.db and the required tables for device 
 Command: python3 initialize_system.py
 
 ### Step B: Register Devices
-Run the management tool for each P210M outlet. This script handshakes with the device using your credentials, retrieves the Credentials Hash and Device Label, and saves only the hash to the database for future use.
+Run the management tool for each device. This script handshakes with the device using your credentials, retrieves the Credentials Hash and Device Label, and saves only the hash to the database for future use. Hostname can be either a proper DNS name or an IP address.
 
-Command: python3 manage_devices.py HOST USERNAME PASSWORD
+Command: python3 manage_devices.py HOSTNAME USERNAME PASSWORD
 
 ### Step C: Secure the Database
 To protect your credentials hashes, set restrictive file permissions:
@@ -70,7 +70,7 @@ Start the Flask server to view your live graphs and network health metrics.
 
 Command: python3 app.py
 
-Access the dashboard at: http://<your-pi-ip>:5000
+Access the dashboard at: http://<your-ip>:5000
 
 ## 7. Captured Data Points
 The system collects the following metrics every 60 seconds:
@@ -80,4 +80,4 @@ The system collects the following metrics every 60 seconds:
 - State: Logical On/Off status.
 
 ---
-Developed for local-first hardware monitoring at ChicoFabLab.
+Developed for local-first power hardware monitoring at ChicoFabLab. ~sfranzyshen
