@@ -1,3 +1,5 @@
+<img src="images/powershift.png" alt="PowerShift Logo" width="300" />
+
 # Local Power Monitoring System
 
 A local-first, cloud-free telemetry system for monitoring TP-Link Tapo Matter plugs/outlets/switches (P110m, P210M, S515) using [python-kasa](https://github.com/python-kasa/python-kasa) CLI utilities. This system logs power metrics and network health into a local SQLite database and serves a responsive web dashboard.
